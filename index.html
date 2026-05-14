@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>FIDD-13000 Dataset | Gated Access for Forensic Research</title>
+    <!-- Google Fonts & simple reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f6f9fc;
+            color: #0b2b3b;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* header + hero */
+        .hero {
+            background: linear-gradient(135deg, #0a2e3a 0%, #134b5e 100%);
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            color: white;
+            box-shadow: 0 12px 25px -12px rgba(0,0,0,0.2);
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 85%;
+            opacity: 0.92;
+            margin-top: 0.5rem;
+        }
+
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem 1.8rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e2edf2;
+            transition: 0.2s;
+            flex: 1 1 280px;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #115a6e;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #1c4e5e;
+        }
+
+        .dua-section, .request-section, .template-section, .takedown-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e2edf2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: #0c4a5e;
+            margin-bottom: 1.2rem;
+            border-left: 5px solid #2c9c7c;
+            padding-left: 1rem;
+        }
+
+        .term-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .term-box {
+            background: #f8fafc;
+            border-radius: 1.2rem;
+            padding: 1.2rem 1.3rem;
+            border-left: 3px solid;
+        }
+
+        .permitted { border-left-color: #2c9c7c; }
+        .prohibited { border-left-color: #e26d5c; }
+        .handling { border-left-color: #3a86b0; }
+
+        .term-box strong {
+            display: block;
+            font-size: 1.05rem;
+            margin-bottom: 0.7rem;
+            font-weight: 700;
+        }
+
+        .term-box ul, .term-box p {
+            margin-left: 1rem;
+            font-size: 0.9rem;
+            color: #2d4a5c;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #1a6d7c;
+            color: white;
+            font-weight: 600;
+            padding: 0.7rem 1.5rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #1a6d7c;
+            color: #1a6d7c;
+        }
+
+        .btn-outline:hover {
+            background: #eef4f7;
+        }
+
+        .btn:hover {
+            background: #0e5566;
+            cursor: pointer;
+        }
+
+        .template-pre {
+            background: #f1f5f9;
+            padding: 1.2rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-break: break-word;
+            border: 1px solid #dce7ed;
+        }
+
+        .email-highlight {
+            background: #fef4e8;
+            padding: 0.5rem 1rem;
+            border-radius: 0.8rem;
+            font-family: monospace;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: none;
+            border-top: 1px solid #dce9ef;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #6b8c9c;
+            border-top: 1px solid #d4e2e8;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 780px) {
+            .term-list { grid-template-columns: 1fr; }
+            .hero p { max-width: 100%; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <div class="hero-badge">🔒 Gated-access · Research only</div>
+        <h1>FIDD-13000 Dataset</h1>
+        <p>Large-scale benchmark for social media image forgery detection & localisation.<br>
+        Request access for non‑commercial academic research, forensics, and fair evaluation.</p>
+        <p style="margin-top: 1rem;">📁 Code, weights & scripts: <strong style="background: rgba(255,255,255,0.2); padding: 0.2rem 0.5rem; border-radius: 12px;">https://github.com/Mehedicse11/FIDF_FakeImageDetectionFramework</strong></p>
+    </div>
+
+    <div class="info-grid">
+        <div class="card">
+            <h3>🎯 Who may apply</h3>
+            <p>Academic / non-profit / governmental forensic agencies. <strong>Non‑commercial</strong> scientific research, education, or forensic tooling.<br>❌ Commercial entities or personal email addresses are not granted.</p>
+        </div>
+        <div class="card">
+            <h3>📬 How to request</h3>
+            <p>Send email to <strong>mehediranacse11@gmail.com</strong><br>Subject: <code style="background:#eef2f5; padding:2px 6px; border-radius:8px;">FIDD-13000 Access Request — [Your Institution]</code><br>From a <strong>verifiable institutional email</strong> (.edu, .org, gov). Students must CC supervisor.</p>
+        </div>
+        <div class="card">
+            <h3>⏱️ After approval</h3>
+            <p>Within 7 days: time‑limited download link + SHA‑256 checksum + README. Archive expires in 14 days. You’ll be added to the access‑holder list for updates & takedown notices.</p>
+        </div>
+    </div>
+
+    <!-- Request requirements + acceptance -->
+    <div class="request-section">
+        <h2>📋 Required information (use template in §6)</h2>
+        <p style="margin-bottom: 1rem;">Your request email must include <strong>all</strong> fields below — incomplete requests get one reply, then closed.</p>
+        <ul style="margin-left: 1.5rem; columns: 2; column-gap: 2rem; list-style-type: disc; color: #1f5e72;">
+            <li>Full name of requester</li>
+            <li>Institutional affiliation (dept & univ)</li>
+            <li>Position (PhD, postdoc, faculty, analyst)</li>
+            <li>Supervisor (if student) + CC them</li>
+            <li>Institutional webpage / ORCID</li>
+            <li>Country of institution</li>
+            <li>Co‑investigators (if any)</li>
+            <li>Intended use (100–300 words)</li>
+            <li>Explicit DUA acceptance (verbatim)</li>
+        </ul>
+        <div style="background: #eef3f7; border-radius: 1rem; margin-top: 1.3rem; padding: 0.8rem 1.2rem;">
+            ⚠️ PhD / Master's students: <strong>must name supervisor and include them in CC line</strong> — requests without CC will not be processed.
+        </div>
+    </div>
+
+    <!-- DATA USE AGREEMENT (central) -->
+    <div class="dua-section">
+        <h2>📜 Data Use Agreement (DUA)</h2>
+        <p>By requesting and downloading FIDD-13000, you agree to the following binding terms for yourself, co‑investigators, and institution.</p>
+        
+        <div class="term-list">
+            <div class="term-box permitted">
+                <strong>✅ Permitted uses</strong>
+                <ul>
+                    <li>Non‑commercial academic research in image/multimedia forensics, digital investigation</li>
+                    <li>Training, evaluation, benchmarking of forgery detection & localisation methods</li>
+                    <li>Aggregate results + small illustrative examples in academic publications (cite paper)</li>
+                    <li>Classroom teaching at your institution <em>(no redistribution to outsiders)</em></li>
+                </ul>
+            </div>
+            <div class="term-box prohibited">
+                <strong>🚫 Prohibited uses</strong>
+                <ul>
+                    <li><strong>Redistribution</strong> to any third party (others must request individually)</li>
+                    <li><strong>Commercial use</strong> (products, services, consultancy)</li>
+                    <li><strong>Training generative models</strong> (GANs, diffusion, autoencoders, face synthesis)</li>
+                    <li>Re‑identification, profiling, surveillance, or targeting individuals depicted</li>
+                    <li>Operational content moderation / law enforcement pipelines without ethical review</li>
+                    <li>Creating non‑consensual synthetic media</li>
+                    <li>Bulk public display of images without written permission</li>
+                </ul>
+            </div>
+            <div class="term-box handling">
+                <strong>🔐 Security & handling</strong>
+                <ul>
+                    <li>Store on institution‑controlled systems, <strong>NOT</strong> personal cloud drives</li>
+                    <li>Requester responsible for all co‑investigators’ compliance</li>
+                    <li>If co‑investigator leaves group → delete local dataset copy</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 1rem; padding: 0.8rem 1rem; background: #fef6e0; border-radius: 1rem;">
+            <strong>⚠️ Takedown & termination</strong> — Individuals can request removal; all DUA holders will be notified and <strong>must delete affected images and derived artefacts within 30 days</strong>. Violation may lead to immediate revocation and deletion requirements.
+        </div>
+        <div style="margin-top: 1rem; font-size: 0.9rem;">
+            <strong>Citation required</strong> — Any publication using FIDD-13000 must cite:<br>
+            <span style="font-family: monospace; background: #f0f4f8; display: inline-block; padding: 6px 12px; border-radius: 12px; margin-top: 6px;">M. M. R. Rana, M. A. Rahman, K. H. Talukder, R. Amin, "FIDF: A Multi-View Discrepancy-Gated Hypergraph Framework...", <em>Forensic Science International: Digital Investigation</em>, [DOI].</span>
+        </div>
+    </div>
+
+    <!-- Email template card -->
+    <div class="template-section">
+        <h2>✉️ Email template (copy & paste)</h2>
+        <p>Fill brackets, send from <strong>institutional email</strong>. Do not modify the acceptance statement.</p>
+        <div class="template-pre">
+Subject: FIDD-13000 Access Request — [Your Institution]
+
+To the FIDF authors,
+
+I am writing to request access to the FIDD-13000 dataset for academic research.
+
+1. Full name:                  [your full name]
+2. Institutional affiliation:  [department, institution]
+3. Position:                   [e.g. PhD student / postdoc / faculty]
+4. Supervisor (if student):    [name and institutional email; CC them on this request]
+5. Institutional webpage or ORCID: [URL or ORCID iD]
+6. Country of institution:     [country]
+7. Co-investigators who will have access (if any): [name(s), affiliation(s), or "none"]
+
+Intended research use (100–300 words):
+[Describe research problem, how FIDD-13000 will be used, whether derived artefacts will be released.]
+
+Acceptance of the Data Use Agreement:
+
+I have read the Data Use Agreement set out in §4 of the DATASET_ACCESS.md document published with the FIDF repository, and I agree to be bound by its terms. I understand that the dataset is provided for non-commercial academic research only, that redistribution is prohibited, that I may not use the dataset to train generative or face-synthesis models, and that access may be revoked if the agreement is violated. I accept responsibility for ensuring that any named co-investigators comply with these terms.
+
+Signed,
+[Full name]
+[Position, institution]
+[Institutional email address]
+[Date]
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.85rem;">📎 <strong>Important:</strong> Students must CC supervisor. Incomplete requests will receive one clarification request; a second incomplete request will be closed.</p>
+    </div>
+
+    <!-- takedown & contact & process info -->
+    <div class="takedown-section">
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between;">
+            <div style="flex: 1;">
+                <h2 style="border-left-color: #e26d5c;">🕊️ Takedown procedure</h2>
+                <p>Any individual who recognises themselves in FIDD-13000 (or authorised representative) may request removal. Email <strong>mehediranacse11@gmail.com</strong> with subject <code style="background:#f1f3f5;">FIDD-13000 Takedown Request</code>. Requests are acknowledged within 7 days and honoured within 30 days. All DUA holders will be notified and must delete affected images + derived artefacts.</p>
+            </div>
+            <div style="flex: 1;">
+                <h2 style="border-left-color: #2c9c7c;">📌 After submission</h2>
+                <p>✔️ <strong>Approved:</strong> download link, SHA-256, changelog, DUA confirmation.<br>
+                ❓ <strong>Clarification needed:</strong> missing fields.<br>
+                ❌ <strong>Declined:</strong> commercial intent, non-institutional email, insufficient use description.<br>
+                <br>Access records (name, institution, country, approval date) maintained only for notifications & journal verification. No personal data retained beyond that.</p>
+            </div>
+        </div>
+        <hr>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; align-items: center;">
+            <div>
+                <strong>📧 Contact corresponding author</strong><br>
+                Md. Mehedi Rahman Rana · Computer Science and Engineering, Khulna University<br>
+                <span class="email-highlight">mehediranacse11@gmail.com</span>
+            </div>
+            <div>
+                <span style="background:#eef2f5; padding: 0.3rem 1rem; border-radius: 40px; font-size: 0.75rem;">📄 Document version 1.0 — Last updated 10 May 2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- additional notes: institutional storage, generative model prohibition reiteration -->
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; background: #ffffffdd; border-radius: 1.2rem; padding: 1rem 1.6rem; border: 1px solid #dde6ec; margin-bottom: 1rem;">
+        <div style="font-size: 0.85rem;"><span style="font-weight: 700;">🔒 Storage rules:</span> Dataset must be stored on systems controlled by your institution. Personal Google Drive / Dropbox prohibited.</div>
+        <div style="font-size: 0.85rem;"><span style="font-weight: 700;">📚 Updates to DUA:</span> Material changes notified by email; continued use constitutes acceptance.</div>
+        <div style="font-size: 0.85rem;"><span style="font-weight: 700;">🧪 Derived artefacts:</span> If you plan to release trained models / features, you must describe terms in your request.</div>
+    </div>
+
+    <footer>
+        FIDD-13000 is released under gated access for ethical, reproducible research in image forensics.<br>
+        Code, model weights, and evaluation scripts: <a href="#" style="color: #1a6d7c;">https://github.com/Mehedicse11/FIDF_FakeImageDetectionFramework</a><br>
+        By requesting access, you agree to the full Data Use Agreement and understand that any violation may result in access revocation.
+    </footer>
+</div>
+</body>
+</html>
